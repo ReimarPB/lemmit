@@ -14,26 +14,20 @@
 			<?php foreach ($result->posts as $index => $post): ?>
 				<tr class="post-row">
 					<td class="post-icon">
-						<?php if (!is_null($post->thumbnail_url)): ?>
-							<img src="<?= $post->thumbnail_url ?>" alt="<?= $post->embed_title ?>">
-						<?php elseif ($post->url): ?>
-							<img class="placeholder-icon" src="/assets/icons/link.png" alt="">
-						<?php else: ?>
-							<img class="placeholder-icon" src="/assets/icons/text.png" alt="">
-						<?php endif ?>
+						<label for="post-content-<?= $index ?>">
+							<?php if ($post->post->thumbnail_url): ?>
+								<img class="thumbnail-icon" src="<?= $post->post->thumbnail_url ?>" alt="<?= $post->post->embed_title ?>">
+							<?php elseif ($post->post->url): ?>
+								<img class="placeholder-icon" src="/assets/icons/link.png" alt="">
+							<?php else: ?>
+								<img class="placeholder-icon" src="/assets/icons/text.png" alt="">
+							<?php endif ?>
+						</label>
 					</td>
 					<td class="post">
-						<?php if ($post->post->url): ?>
-							<a class="post-title" href="<?= $post->post->url ?: "#" ?>" target="_blank">
-								<?= $post->post->name ?>
-							</a>
-						<?php elseif ($post->post->body): ?>
-							<label class="post-title" for="post-content-<?= $index ?>">
-								<?= $post->post->name ?>
-							</label>
-						<?php else: ?>
-							<span class="post-title"><?= $post->post->name ?></span>
-						<?php endif ?>
+						<a class="post-title" href="<?= $post->post->url ?: "/post?id=" . $post->post->id ?>">
+							<?= $post->post->name ?>
+						</a>
 						<br>
 						<span class="post-info">
 							by
@@ -65,9 +59,11 @@
 				<tr>
 					<td style="background-color: #EEE"></td>
 					<td style="background-color: #EEE">
+						<input type="checkbox" id="post-content-<?= $index ?>" class="post-content-checkbox">
 						<?php if ($post->post->body): ?>
-							<input type="checkbox" id="post-content-<?= $index ?>" class="post-content-checkbox">
 							<div class="post-content"><?= $post->post->body ?></div>
+						<?php elseif ($post->post->thumbnail_url): ?>
+							<div class="post-content"><img src="<?= $post->post->thumbnail_url ?>" alt="" style="max-width: 300px"></div>
 						<?php endif ?>
 					</td>
 				</tr>
