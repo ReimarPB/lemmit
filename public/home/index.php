@@ -11,7 +11,7 @@
 	</head>
 	<body>
 		<table id="posts">
-			<?php foreach ($result->posts as $post): ?>
+			<?php foreach ($result->posts as $index => $post): ?>
 				<tr class="post-row">
 					<td class="post-icon">
 						<?php if (!is_null($post->thumbnail_url)): ?>
@@ -23,9 +23,17 @@
 						<?php endif ?>
 					</td>
 					<td class="post">
-						<a class="post-title" href="<?= $post->post->url ?: "#" ?>" target="_blank">
-							<?= $post->post->body ?>
-						</a>
+						<?php if ($post->post->url): ?>
+							<a class="post-title" href="<?= $post->post->url ?: "#" ?>" target="_blank">
+								<?= $post->post->name ?>
+							</a>
+						<?php elseif ($post->post->body): ?>
+							<label class="post-title" for="post-content-<?= $index ?>">
+								<?= $post->post->name ?>
+							</label>
+						<?php else: ?>
+							<span class="post-title"><?= $post->post->name ?></span>
+						<?php endif ?>
 						<br>
 						<span class="post-info">
 							by
@@ -46,12 +54,21 @@
 								<?= $post->counts->score ?>
 							</span>
 							<button class="downvote">&#9660;</button>
-							<a class="comments" href="/post?id=<?= $post->id ?>">
+							<a class="comments" href="/post?id=<?= $post->post->id ?>">
 								<?= $post->counts->comments ?>
 								comment<?= $post->counts->comments != 1 ? "s" : "" ?>
 								<?= $post->counts->unread_comments != $post->counts->comments && $post->counts->unread_comments > 0 ? " (" . $post->counts->unread_comments . ")" : "" ?>
 							</a>
 						</span>
+					</td>
+				</tr>
+				<tr>
+					<td style="background-color: #EEE"></td>
+					<td style="background-color: #EEE">
+						<?php if ($post->post->body): ?>
+							<input type="checkbox" id="post-content-<?= $index ?>" class="post-content-checkbox">
+							<div class="post-content"><?= $post->post->body ?></div>
+						<?php endif ?>
 					</td>
 				</tr>
 			<?php endforeach ?>
