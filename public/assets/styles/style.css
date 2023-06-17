@@ -3,21 +3,30 @@ body {
 	background-color: #EEE;
 }
 
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
 #posts {
 	background-color: white;
+	width: 100%;
+	border-collapse: collapse;
 }
 
 .post {
-	padding: 1em;
+	padding: 0.5em 1em;
 }
 
-.post + .post {
-	border-top: 1px solid #EEE;
+.post-row + .post-row {
+	border-top: 2px solid #EEE;
 }
 
 .post-title {
 	color: black;
-	text-decoration: none;
 }
 
 .post-title:visited {
@@ -26,20 +35,48 @@ body {
 
 .post-title:hover {
 	color: black;
-	text-decoration: underline;
 }
 
 .post-info {
-	font-size: 0.6em;
+	font-size: 0.7em;
 	color: #747474;
 }
 
 .post-info a {
 	color: black;
-	text-decoration: none;
 }
 
-.post-info a:hover {
-	text-decoration: underline;
+.post-actions {
+	color: #747474;
+	font-size: 0.7em;
+}
+
+.post-actions button {
+	background: none;
+	border: none;
+	color: inherit;
+	margin: 0;
+	padding: 0;
+}
+
+.vote-count {
+	padding: 0 0.3em;
+}
+
+.post-icon {
+	background-color: #BDBDBD;
+	width: 5em;
+	height: 100%;
+	text-align: center;
+}
+
+.placeholder-icon {
+	width: 2em;
+	height: 2em;
+}
+
+.comments {
+	padding-left: 0.5rem;
+	color: #747474;
 }
 
