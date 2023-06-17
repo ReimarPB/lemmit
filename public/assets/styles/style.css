@@ -1,12 +1,45 @@
+body {
+	font-family: sans-serif;
+	background-color: #EEE;
+}
+
+#posts {
+	background-color: white;
+}
+
 .post {
-	margin: 1em;
+	padding: 1em;
+}
+
+.post + .post {
+	border-top: 1px solid #EEE;
 }
 
 .post-title {
+	color: black;
+	text-decoration: none;
+}
 
+.post-title:visited {
+	color: #747474;
+}
+
+.post-title:hover {
+	color: black;
+	text-decoration: underline;
 }
 
 .post-info {
 	font-size: 0.6em;
+	color: #747474;
+}
+
+.post-info a {
+	color: black;
+	text-decoration: none;
+}
+
+.post-info a:hover {
+	text-decoration: underline;
 }
 
