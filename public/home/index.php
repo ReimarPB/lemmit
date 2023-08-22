@@ -3,10 +3,12 @@
 
 	$result = request("GET", "/post/list", null);
 ?>
+<!-- <?= json_encode($result, JSON_PRETTY_PRINT) ?> -->
 <!DOCTYPE html>
 <html>
 	<head>
 		<?php require "../include/head.php" ?>
+		<link rel="stylesheet" href="/assets/style/posts.css">
 		<title>Posts</title>
 	</head>
 	<body>
@@ -57,15 +59,29 @@
 					</td>
 				</tr>
 				<tr>
-					<td style="background-color: #EEE"></td>
-					<td style="background-color: #EEE">
+					<td style="background-color: #EEE; padding: 0"></td>
+					<td style="background-color: #EEE; padding: 0">
 						<input type="checkbox" id="post-content-<?= $index ?>" class="post-content-checkbox">
 						<?php if ($post->post->body): ?>
 							<div class="post-content"><?= $post->post->body ?></div>
 						<?php elseif ($post->post->thumbnail_url): ?>
-							<div class="post-content"><img src="<?= $post->post->thumbnail_url ?>" alt="" style="max-width: 300px"></div>
+							<div class="post-content"><!--
+								--><a href="<?= $post->post->thumbnail_url ?>" target="_blank"><!--
+									--><img src="<?= $post->post->thumbnail_url ?>" alt=""><!--
+								--></a><!--
+								<?php if ($post->post->embed_title): ?>
+									--><h2><?= $post->post->embed_title ?></h2><!--
+								<?php endif ?>
+								<?php if ($post->post->embed_description): ?>
+									--><p><?= $post->post->embed_description ?></p><!--
+								<?php endif ?>
+							--></div>
 						<?php endif ?>
 					</td>
+				</tr>
+				<tr>
+					<td style="background-color: #EEE; padding: 0"></td>
+					<td class="post-spacing"></td>
 				</tr>
 			<?php endforeach ?>
 		</table>
